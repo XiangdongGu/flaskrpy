@@ -4,7 +4,7 @@
 \alias{rds_to_env}
 \title{Load all RDS files from a folder into global enrironment}
 \usage{
-rds_to_env(folder)
+rds_to_env(folder, file = NULL)
 }
 \arguments{
 \item{folder}{folder containing the RDS objects}

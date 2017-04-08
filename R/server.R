@@ -6,8 +6,9 @@
 #' rds_to_env(folder)
 #' @export
 #'
-rds_to_env <- function(folder) {
+rds_to_env <- function(folder, file = NULL) {
   rdss <- list.files(folder, "\\.rds$")
+  if (!is.null(file)) rdss <- intersect(rdss, file)
   rds_names <- gsub("\\.rds$", "", rdss)
   env_names <- paste0("env_", rds_names)
   # Create environments for each model with name based on the model name

@@ -8,7 +8,16 @@ import os
 import string
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = "workspaces"
+app.config['UPLOAD_FOLDER'] = "rdsfiles"
+
+@app.route('/deploy', methods = ['POST'])
+def deploy():
+	file = request.files['rdsfile']
+	filename = request.files['rdsfile'].filename
+	file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	cmd = 'rds_to_env("%s", "%s")' % (app.config['UPLOAD_FOLDER'], filename)
+	robjects.r(cmd)
+	return jsonify(OK = "SUCCESS!")
 
 @app.route('/r/<model>/<fun>', methods = ['POST'])
 def r_call(model, fun):

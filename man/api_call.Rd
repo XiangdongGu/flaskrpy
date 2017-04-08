@@ -2,7 +2,7 @@
 % Please edit documentation in R/client.R
 \name{api_call}
 \alias{api_call}
-\title{Make API call}
+\title{Make an API call}
 \usage{
 api_call(model, func, req, host = "http://127.0.0.1:5000")
 }
@@ -16,7 +16,7 @@ api_call(model, func, req, host = "http://127.0.0.1:5000")
 \item{host}{the host of the API server}
 }
 \description{
-Make API call
+Make an API call
 }
 \examples{
 \dontrun{

@@ -47,3 +47,13 @@ saveRDS(list(pred = pred, fit = fit, trasnform = transform),
 
 api_call("iris", "pred", iris[1:90, ])
 
+# deploy from R--------------
+myfit <- lm(qsec~disp + hp, data = mtcars)
+mypred <- function(d) {
+  d <- as.data.frame(d)
+  list(pred = predict(myfit, d))
+}
+
+api_deploy(myfit, mypred, model_name = "test_myapi")
+
+api_call("test_myapi", "mypred", mtcars)

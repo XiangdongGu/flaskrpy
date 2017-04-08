@@ -1,3 +1,4 @@
+library(dplyr)
 library(flaskrpy)
 library(jsonlite)
 library(randomForest)
