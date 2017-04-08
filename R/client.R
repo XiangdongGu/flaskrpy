@@ -43,3 +43,19 @@ api_deploy <- function(..., model_name, host = "http://127.0.0.1:5000") {
                    rdsfile = upload_file(fpath)))
   cat("SUCCESS!")
 }
+
+#' Make a function to available for API call
+#'
+#' By default, a function should not be exposed to API for security concern.
+#' We should only expose the functions we know that has no side effect and
+#' necessary for user to use.
+#'
+#' @param f the function to expose
+#' @export
+#'
+api_expose <- function(f) {
+  if (!is.function(f)) stop("Object is not a function.")
+  attr(f, "api_expose") <- TRUE
+  f
+}
+

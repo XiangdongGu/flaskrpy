@@ -36,3 +36,14 @@ json_wrapper <- function(x) {
   if (any(names(x) == "")) return(list(response = x))
   x
 }
+
+#' Check if an object is exposed or not
+#'
+#' @param f the function to check
+#' @export
+#'
+is_expose <- function(f) {
+  isexpose <- try(attr(f, "api_expose", exact = TRUE))
+  if (inherits(isexpose, "try-error")) isexpose <- FALSE
+  isexpose
+}

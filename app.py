@@ -22,6 +22,12 @@ def deploy():
 @app.route('/r/<model>/<fun>', methods = ['POST'])
 def r_call(model, fun):
 	req = request.data
+	# check if function exposed for API or not
+	isexpose = robjects.r('with(env_%s, {is_expose(%s)})' \
+		% (model, fun))
+	if not isexpose:
+		return jsonify(Error = "Function requested not available. " + \
+			"Use api_expose function in R to expose the function"), 403
 	robjects.globalenv['req_data'] = req
 	myreq = robjects.r('with(env_%s, \
 		{toJSON(json_wrapper(%s(fromJSON(req_data))))})' \

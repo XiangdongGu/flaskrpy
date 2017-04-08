@@ -2,5 +2,7 @@
 
 export(api_call)
 export(api_deploy)
+export(api_expose)
+export(is_expose)
 export(json_wrapper)
 export(rds_to_env)

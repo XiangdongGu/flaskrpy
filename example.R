@@ -1,4 +1,6 @@
 library(jsonlite)
+library(flaskrpy)
+host <- "http://127.0.0.1:5000"
 
 # Random normal generation
 d <- list(n = 10, mean = 1, sd = 40)
@@ -42,10 +44,11 @@ pred <- function(d) {
   predict(fit, transform(d))
 }
 
-saveRDS(list(pred = pred, fit = fit, trasnform = transform),
-        file = "rdsfiles/iris.rds")
+pred <- api_expose(pred)
 
-api_call("iris", "pred", iris[1:90, ])
+api_deploy(transform, fit, pred, model_name = "iris", host = host)
+
+api_call("iris", "pred", iris[1:90, ], host = host)
 
 # deploy from R--------------
 myfit <- lm(qsec~disp + hp, data = mtcars)
@@ -53,7 +56,10 @@ mypred <- function(d) {
   d <- as.data.frame(d)
   list(pred = predict(myfit, d))
 }
+# mypred <- api_expose(mypred)
+api_deploy(myfit, mypred, model_name = "test_myapi", host = host)
 
-api_deploy(myfit, mypred, model_name = "test_myapi")
+api_call("test_myapi", "mypred", mtcars, host = host)
 
-api_call("test_myapi", "mypred", mtcars)
+
+
