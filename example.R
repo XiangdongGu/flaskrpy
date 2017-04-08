@@ -26,14 +26,7 @@ pred <- function(d) {
 }
 saveRDS(list(fit = fit, pred = pred), file = "rdsfiles/mtcars.rds")
 
-fromJSON(
-  content(
-    POST(
-      "http://127.0.0.1:5000/r/mtcars/pred",
-      body = toJSON(mtcars)
-    ),
-    "text")
-)
+api_call("mtcars", "pred", mtcars)
 
 # Random forest model-----
 library(randomForest)
@@ -52,12 +45,5 @@ pred <- function(d) {
 saveRDS(list(pred = pred, fit = fit, trasnform = transform),
         file = "rdsfiles/iris.rds")
 
-fromJSON(
-  content(
-    POST(
-      "http://127.0.0.1:5000/r/iris/pred",
-      body = toJSON(iris)
-    ),
-    "text")
-)
+api_call("iris", "pred", iris[1:90, ])
 
