@@ -75,12 +75,14 @@ api_call(model = "iristest", func = "pred", req = iris[1:5, ],
 We can also call the deployed model prediction API using CURL
 
 ```
-curl -i -k -H "Content-Type: application/json" -X POST -d '[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,
+curl -i -k -H "Content-Type: application/json" -X POST -d 
+'[{"Sepal.Length":5.1,"Sepal.Width":3.5,"Petal.Length":1.4,
 "Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":4.9,
 "Sepal.Width":3,"Petal.Length":1.4,"Petal.Width":0.2,
 "Species":"setosa"},{"Sepal.Length":4.7,"Sepal.Width":3.2,
 "Petal.Length":1.3,"Petal.Width":0.2,"Species":"setosa"},
 {"Sepal.Length":4.6,"Sepal.Width":3.1,"Petal.Length":1.5,
 "Petal.Width":0.2,"Species":"setosa"},{"Sepal.Length":5,
-"Sepal.Width":3.6,"Petal.Length":1.4,"Petal.Width":0.2,"Species":"setosa"}]' http://127.0.0.1:5000/r/iristest/pred
+"Sepal.Width":3.6,"Petal.Length":1.4,"Petal.Width":0.2,
+"Species":"setosa"}]' http://127.0.0.1:5000/r/iristest/pred
 ```
