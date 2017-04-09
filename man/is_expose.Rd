@@ -6,6 +6,9 @@
 \usage{
 is_expose(f)
 }
+\arguments{
+\item{f}{the function to check}
+}
 \description{
 Check if an object is exposed or not
 }

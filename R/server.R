@@ -12,7 +12,7 @@ rds_to_env <- function(folder, file = NULL) {
   rds_names <- gsub("\\.rds$", "", rdss)
   env_names <- paste0("env_", rds_names)
   # Create environments for each model with name based on the model name
-  for (i in seq(length(rdss))) {
+  for (i in seq_along(rdss)) {
     obj <- readRDS(file.path(folder, rdss[i]))
     nenv <- list2env(obj, parent = .GlobalEnv)
     for (s in names(obj)) environment(nenv[[s]]) <- nenv
